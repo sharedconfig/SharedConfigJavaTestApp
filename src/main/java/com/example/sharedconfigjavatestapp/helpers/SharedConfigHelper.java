@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +27,7 @@ public class SharedConfigHelper {
         var currentExecutableFolder = currentExecutable.isDirectory() ? currentExecutable.toString() : currentExecutable.getParentFile().toString();
         log.info("Current executable folder : {}", currentExecutableFolder);
 
-        var filesToCheck = new ArrayList<String>();
+        var filesToCheck = new HashSet<String>();
         filesToCheck.add("c-build.vars.xml");
         filesToCheck.add("c-dev.vars.xml");
         filesToCheck.addAll(List.of(appConfigNames));
