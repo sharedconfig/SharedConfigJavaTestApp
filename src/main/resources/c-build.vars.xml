@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!--
+  Переменные для локального тестирования. Данный файл не попадает в дистрибутив.
+-->
+<variables>
+    <var name="TestJavaApp.ConnectionString1">C-BUILD-CON_STRING1</var>
+    <var name="TestJavaApp.ConnectionString2">C-BUILD-CON_STRING2</var>
+    <var name="TestJavaApp.MaxConcurrencyLevel">123</var>
+</variables>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Файл декларации конфигурации приложения. Содержит список переменных, которые будут доставлены в систему конфигурирования. -->
+
+<configuration format="1.0.0" store-path=".config" xmlns:a="application" xmlns:b="block" xmlns:i="information" xmlns:m="metadata" xmlns:d="dimension">
+    <sources>
+        <source from="./"  to="./"/>
+    </sources>
+    <application>
+        <templates>
+            <include processor="dog" mask="*.properties"  searchOption="AllDirectories" />
+        </templates>
+        <variables>
+            <var name="TestJavaApp.ConnectionString1" i:description="Строка подключения к бд 1" i:optional="true">MyConString1</var>
+            <var name="TestJavaApp.ConnectionString2" i:description="Строка подключения к бд 2" i:optional="true">MyConString2</var>
+            <var name="TestJavaApp.MaxConcurrencyLevel" i:description="Максимальная степень параллелизма" i:optional="true">10</var>
+        </variables>
+    </application>
+</configuration>
