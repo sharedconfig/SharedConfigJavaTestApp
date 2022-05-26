@@ -1,6 +1,6 @@
 package com.example.sharedconfigjavatestapp.configuration;
 
-import com.example.sharedconfigjavatestapp.helpers.SharedConfigHelper;
+import com.example.sharedconfigjavatestapp.helpers.ClassLocationHelper;
 import lombok.extern.log4j.Log4j2;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +12,7 @@ import sharedconfig.core.ConfigurationEngine;
 import sharedconfig.core.SharedConfigLoggerConfigurer;
 import sharedconfig.core.interfaces.IScopedConfigurationService;
 import sharedconfig.core.interfaces.ISharedConfigMonitor;
+import sharedconfig.helpers.SharedConfigHelperTwo;
 
 import javax.inject.Singleton;
 
@@ -32,8 +33,19 @@ public class UpConfiguration {
     ConfigurationEngine getConfigurationEngine() throws Exception {
         log.info("Start configuring ConfigurationEngine");
 
+        var currentExecutable = ClassLocationHelper.urlToFile(ClassLocationHelper.getLocation(UpConfiguration.class));
+        var currentExecutableFolder = currentExecutable.isDirectory() ? currentExecutable.toString() : currentExecutable.getParentFile().toString();
+
+        //тестирование нового метода
+        if (!currentExecutable.isDirectory()) {
+            // get path of the current running JAR
+//            такой путь нужен
+//            /C:/Users/Vasypu/Desktop/softconsalt/SharedConfigJava/SharedConfigJavaTestApp/target/SharedConfigJavaTestApp-0.0.1-SNAPSHOT.jar
+            SharedConfigHelperTwo.ensureConfigurationFilesExtracted("/" + currentExecutable.toString().replace('\\','/'));
+        }
+
         // проверяем что все файлы для конфигурации извлечены из архива
-        var currentExecutableFolder = SharedConfigHelper.ensureConfigurationFilesExtracted("app-declaration.xml");
+        //var currentExecutableFolder = SharedConfigHelper.ensureConfigurationFilesExtracted("app-declaration.xml");
 
         // включаем сохранения логов конфигурирования в файл
         SharedConfigLoggerConfigurer.traceLogsToFile(appName, appVersion, traceLogPath);
