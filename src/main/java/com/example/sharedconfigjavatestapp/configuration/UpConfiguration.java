@@ -34,9 +34,6 @@ public class UpConfiguration {
         log.info("Start configuring ConfigurationEngine");
 
         // проверяем что все файлы для конфигурации извлечены из архива
-//        var currentExecutableFolder = SharedConfigHelper.ensureConfigurationFilesExtracted("app-declaration.xml");
-
-        // проверяем что все файлы для конфигурации извлечены из архива
         var currentExecutableFolder = SharedConfigConfigurer.ensureConfigurationFilesExtracted(UpConfiguration.class, "up-configuration");
 
         // включаем сохранения логов конфигурирования в файл
