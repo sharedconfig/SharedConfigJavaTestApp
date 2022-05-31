@@ -15,7 +15,8 @@ import sharedconfig.helpers.SharedConfigConfigurer;
 
 import javax.inject.Singleton;
 
-@Configuration @Log4j2
+@Configuration
+@Log4j2
 public class UpConfiguration {
     @Value("${sharedconfig.app-name}")
     private @NotNull String appName;
@@ -36,7 +37,7 @@ public class UpConfiguration {
 //        var currentExecutableFolder = SharedConfigHelper.ensureConfigurationFilesExtracted("app-declaration.xml");
 
         // проверяем что все файлы для конфигурации извлечены из архива
-        var currentExecutableFolder = SharedConfigConfigurer.ensureConfigurationFilesExtracted(UpConfiguration.class);
+        var currentExecutableFolder = SharedConfigConfigurer.ensureConfigurationFilesExtracted(UpConfiguration.class, "up-configuration");
 
         // включаем сохранения логов конфигурирования в файл
         SharedConfigLoggerConfigurer.traceLogsToFile(appName, appVersion, traceLogPath);
