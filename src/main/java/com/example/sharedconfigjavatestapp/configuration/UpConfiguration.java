@@ -11,9 +11,11 @@ import sharedconfig.core.ConfigurationEngine;
 import sharedconfig.core.SharedConfigLoggerConfigurer;
 import sharedconfig.core.interfaces.IScopedConfigurationService;
 import sharedconfig.core.interfaces.ISharedConfigMonitor;
+import sharedconfig.helpers.FileHelper;
 import sharedconfig.helpers.SharedConfigConfigurer;
 
 import javax.inject.Singleton;
+import java.nio.file.Paths;
 
 @Configuration
 @Log4j2
@@ -34,19 +36,19 @@ public class UpConfiguration {
         log.info("Start configuring ConfigurationEngine");
 
         // проверяем что все файлы для конфигурации извлечены из архива
-        var currentExecutableFolder = SharedConfigConfigurer.ensureConfigurationFilesExtracted(UpConfiguration.class, "up-configuration");
+        var configurationFolder = SharedConfigConfigurer.ensureConfigurationFilesExtracted(UpConfiguration.class, "up-configuration");
 
         // включаем сохранения логов конфигурирования в файл
         SharedConfigLoggerConfigurer.traceLogsToFile(appName, appVersion, traceLogPath);
 
         var appSettings = ApplicationSettings.create(
-                currentExecutableFolder,
-                "up-configuration/app-declaration.xml",
+                configurationFolder,
+                "app-declaration.xml",
                 ".config",
                 appName,
                 appVersion);
 
-        var engine = ConfigurationEngine.create(appSettings, currentExecutableFolder);
+        var engine = ConfigurationEngine.create(appSettings, configurationFolder);
         //engine.waitAgent();
         //engine.waitStore();
         return engine;
