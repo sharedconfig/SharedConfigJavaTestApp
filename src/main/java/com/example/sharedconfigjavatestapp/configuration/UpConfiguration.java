@@ -44,7 +44,7 @@ public class UpConfiguration {
         var appSettings = ApplicationSettings.create(
                 configurationFolder,
                 "app-declaration.xml",
-                ".config",
+                "../.config",
                 appName,
                 appVersion);
 
