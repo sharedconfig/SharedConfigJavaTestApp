@@ -36,7 +36,8 @@ public class UpConfiguration {
         log.info("Start configuring ConfigurationEngine");
 
         // проверяем что все файлы для конфигурации извлечены из архива
-        var configurationFolder = SharedConfigConfigurer.ensureConfigurationFilesExtracted(UpConfiguration.class, "up-configuration");
+        var configurationFolder = SharedConfigConfigurer.ensureConfigurationFilesExtracted(UpConfiguration.class, "up-configuration",
+                "C:/Users/Vasypu/Desktop/softconsalt/SharedConfigJava/SharedConfigJavaTestApp/target/up-configuration/prod-config/main-config");
 
         // включаем сохранения логов конфигурирования в файл
         SharedConfigLoggerConfigurer.traceLogsToFile(appName, appVersion, traceLogPath);
