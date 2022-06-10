@@ -1,6 +1,5 @@
 package com.example.sharedconfigjavatestapp.configuration;
 
-import com.example.sharedconfigjavatestapp.helpers.SharedConfigHelper;
 import lombok.extern.log4j.Log4j2;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +11,14 @@ import sharedconfig.core.ConfigurationEngine;
 import sharedconfig.core.SharedConfigLoggerConfigurer;
 import sharedconfig.core.interfaces.IScopedConfigurationService;
 import sharedconfig.core.interfaces.ISharedConfigMonitor;
+import sharedconfig.helpers.FileHelper;
+import sharedconfig.helpers.SharedConfigConfigurer;
 
 import javax.inject.Singleton;
+import java.nio.file.Paths;
 
-@Configuration @Log4j2
+@Configuration
+@Log4j2
 public class UpConfiguration {
     @Value("${sharedconfig.app-name}")
     private @NotNull String appName;
@@ -33,19 +36,19 @@ public class UpConfiguration {
         log.info("Start configuring ConfigurationEngine");
 
         // проверяем что все файлы для конфигурации извлечены из архива
-        var currentExecutableFolder = SharedConfigHelper.ensureConfigurationFilesExtracted("app-declaration.xml");
+        var configurationFolder = SharedConfigConfigurer.ensureConfigurationFilesExtracted(UpConfiguration.class, "up-configuration");
 
         // включаем сохранения логов конфигурирования в файл
         SharedConfigLoggerConfigurer.traceLogsToFile(appName, appVersion, traceLogPath);
 
         var appSettings = ApplicationSettings.create(
-                currentExecutableFolder,
+                configurationFolder,
                 "app-declaration.xml",
-                ".config",
+                "../.config",
                 appName,
                 appVersion);
 
-        var engine = ConfigurationEngine.create(appSettings, currentExecutableFolder);
+        var engine = ConfigurationEngine.create(appSettings, configurationFolder);
         //engine.waitAgent();
         //engine.waitStore();
         return engine;
