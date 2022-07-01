@@ -11,11 +11,9 @@ import sharedconfig.core.ConfigurationEngine;
 import sharedconfig.core.SharedConfigLoggerConfigurer;
 import sharedconfig.core.interfaces.IScopedConfigurationService;
 import sharedconfig.core.interfaces.ISharedConfigMonitor;
-import sharedconfig.helpers.FileHelper;
 import sharedconfig.helpers.SharedConfigConfigurer;
 
 import javax.inject.Singleton;
-import java.nio.file.Paths;
 
 @Configuration
 @Log4j2
@@ -39,7 +37,7 @@ public class UpConfiguration {
         var configurationFolder = SharedConfigConfigurer.ensureConfigurationFilesExtracted(UpConfiguration.class, "up-configuration");
 
         // включаем сохранения логов конфигурирования в файл
-        SharedConfigLoggerConfigurer.traceLogsToFile(appName, appVersion, traceLogPath);
+        SharedConfigLoggerConfigurer.traceLogsToFile(traceLogPath);
 
         var appSettings = ApplicationSettings.create(
                 configurationFolder,
