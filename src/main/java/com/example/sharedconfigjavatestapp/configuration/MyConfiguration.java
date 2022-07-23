@@ -4,9 +4,6 @@ import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import sharedconfig.core.interfaces.IConfigurationVersionSnapshot;
 
-import java.util.Map;
-import java.util.Optional;
-
 public class MyConfiguration {
     @Getter
     private final Long changesetId;
